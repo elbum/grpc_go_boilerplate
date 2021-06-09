@@ -1,0 +1,5 @@
+.vscode/
+ssl/ca.crt 
+ssl/server.key
+ssl/server.pem
+ssl/server.crt 

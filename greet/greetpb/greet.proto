@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package greet;
+
+option go_package="greetpb/";
+
+message Greeting {
+    string first_name = 1;
+    string last_name = 2;
+}
+
+message GreetRequest {
+    Greeting greeting = 1;
+}
+
+message GreetResponse {
+    string result = 1;
+}
+
+message NumReq {
+    int32 first_num = 1;
+    int32 second_num = 2;
+}
+
+message NumRes {
+    int32 result = 1;
+}
+
+message GreetManyTimesRequest {
+    Greeting greeting = 1;
+}
+
+message GreetManyTimesResponse {
+    string result = 1;
+}
+
+message PrimeDecompRequest {
+    int32 num = 1;
+}
+
+message PrimeDecompResponse {
+    int32 result = 1;
+}
+
+message LongGreetRequest {
+    Greeting greeting = 1;
+}
+
+message LongGreetResponse {
+    string result = 1;
+}
+
+message LongNumbers {
+    int32 num = 1;
+}
+
+message ComputeAVGResponse {
+    float result = 1;
+}
+
+message GreetEveryoneRequest {
+    Greeting greeting = 1;
+}
+
+message GreetEveryoneResponse {
+    string result = 1;
+}
+
+message FindMaxRequest {
+    int32 num = 1;
+}
+
+message FindMaxResponse {
+    int32 result = 1;
+}
+
+message SquareRootRequest {
+    int32 number = 1;
+}
+
+message SquareRootResponse {
+    double number_root = 1;
+}
+
+message GreetWithDeadlineRequest {
+    Greeting greeting = 1;
+}
+
+message GreetWithDeadlineResponse {
+    string result = 1;
+}
+
+service GreetService {
+    // Unary
+    rpc Greet(GreetRequest) returns (GreetResponse) {};
+
+    // Unary
+    rpc Sum(NumReq) returns (NumRes) {};
+
+    // Server Streaming
+    rpc GreetManyTimes(GreetManyTimesRequest) returns (stream GreetManyTimesResponse) {};
+
+    // Server Streaming
+    rpc PrimeDecomposition(PrimeDecompRequest) returns (stream PrimeDecompResponse) {};
+
+    // Client Streaming
+    rpc LongGreet(stream LongGreetRequest) returns (LongGreetResponse) {};
+
+    // Client Streaming
+    rpc ComputeAVG(stream LongNumbers) returns (ComputeAVGResponse) {};
+
+    // Bi-di Streaming
+    rpc GreetEveryone(stream GreetEveryoneRequest) returns (stream GreetEveryoneResponse) {};
+
+    // Bi-di Streaming
+    rpc FindMax(stream FindMaxRequest) returns (stream FindMaxResponse) {};
+
+    // Unary
+    // error handling
+    // this rpc will throw an exception if the sent number is negative
+    rpc SquareRoot(SquareRootRequest) returns (SquareRootResponse) {};
+
+    // Unary with Deadline
+    rpc GreetWithDeadline(GreetWithDeadlineRequest) returns (GreetWithDeadlineResponse) {};
+}
